@@ -1,0 +1,110 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
+
+public class WebElementsTest {
+
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void beforeTest() {
+        System.setProperty("webdriver.chrome.driver", "C:drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.navigate().to("http://przyklady.javastart.pl/test/full_form.html");
+    }
+
+    @Test
+    public void typingIntoWebElementTest() {
+        WebElement userNameField = driver.findElement(By.id("username"));
+        userNameField.sendKeys("Selenium Start");
+        //sleep();
+        String typeUserNameValue = userNameField.getAttribute("value");
+
+        assertEquals(typeUserNameValue, "Selenium Start");
+    }
+
+    @Test
+    public void filePickingTest() {
+        WebElement uploadFilePicker = driver.findElement(By.id("upload_file"));
+        uploadFilePicker.sendKeys("D:\\cert_small.jpg");
+
+    }
+
+    @Test
+    public void typingAndClearingValueInsideWebElementTest() {
+        WebElement userNameField = driver.findElement(By.id("username"));
+        userNameField.sendKeys("Selenium Start");
+
+        String typeUserNameValue = userNameField.getAttribute("value");
+        assertEquals(typeUserNameValue, "Selenium Start");
+        userNameField.clear();
+
+        String emptyUserNameField = userNameField.getAttribute("value");
+
+        assertEquals(emptyUserNameField, "");
+    }
+
+    @Test
+    public void checkRadioButtonTest() {
+        WebElement maleRadioButton = driver.findElement(By.cssSelector("input[value='male']"));
+        WebElement femaleRadioButton = driver.findElement(By.cssSelector("input[value='female']"));
+
+        maleRadioButton.click();
+        assertTrue(maleRadioButton.isSelected());
+        femaleRadioButton.click();
+        assertTrue(femaleRadioButton.isSelected());
+        assertFalse(maleRadioButton.isSelected());
+    }
+
+    @Test
+    public void checkButtonTest() {
+        WebElement pizzaCheckbox = driver.findElement(By.cssSelector("input[value='pizza']"));
+        WebElement spaghettiCheckbox = driver.findElement(By.cssSelector("input[value='spaghetti']"));
+        WebElement hamburgerCheckbox = driver.findElement(By.cssSelector("input[value='hamburger']"));
+
+        assertFalse(pizzaCheckbox.isSelected());
+        assertFalse(spaghettiCheckbox.isSelected());
+        assertFalse(hamburgerCheckbox.isSelected());
+
+        pizzaCheckbox.click();
+        spaghettiCheckbox.click();
+        hamburgerCheckbox.click();
+
+        assertTrue(pizzaCheckbox.isSelected());
+        assertTrue(spaghettiCheckbox.isSelected());
+        assertTrue(hamburgerCheckbox.isSelected());
+
+        pizzaCheckbox.click();
+        spaghettiCheckbox.click();
+        hamburgerCheckbox.click();
+
+        assertFalse(pizzaCheckbox.isSelected());
+        assertFalse(spaghettiCheckbox.isSelected());
+        assertFalse(hamburgerCheckbox.isSelected());
+
+
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @AfterMethod
+    public void afterTest() {
+        driver.close();
+        driver.quit();
+    }
+
+}

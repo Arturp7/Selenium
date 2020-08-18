@@ -7,26 +7,14 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class FirstAutomatedTest {
 
+public class SecondAutomatedTest {
     private WebDriver driver;
 
     @BeforeMethod
     public void beforeTest() {
         System.setProperty("webdriver.chrome.driver", "C:/drivers/chromedriver.exe");
         driver = new ChromeDriver();
-    }
-
-    @Test
-    public void myFirstTest() {
-        driver.navigate().to("http://google.pl");
-
-        driver.findElement(By.name("q")).sendKeys("JavaStart");
-        driver.findElement(By.name("q")).submit();
-
-        String pageTitle = driver.getTitle();
-
-        assertTrue(pageTitle.contains("JavaStart"));
     }
     @Test
     public void mySecondTest(){
@@ -42,4 +30,5 @@ public class FirstAutomatedTest {
         driver.close();
         driver.quit();
     }
+
 }

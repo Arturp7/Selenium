@@ -94,7 +94,7 @@ public class WebElementsTest {
     }
 
     @Test
-    public void dropDownListTest(){
+    public void dropDownListTest() {
         WebElement countryWebElement = driver.findElement(By.id("country"));
 
         Select countryDropdown = new Select(countryWebElement);
@@ -103,7 +103,7 @@ public class WebElementsTest {
 
         List<String> namesOfOptions = new ArrayList<String>();
 
-        for (WebElement option : options){
+        for (WebElement option : options) {
             namesOfOptions.add(option.getText());
             System.out.println(option.getText());
         }
@@ -112,30 +112,54 @@ public class WebElementsTest {
         expectedNamesOfOptions.add("Poland");
         expectedNamesOfOptions.add("UK");
 
-        assertEquals(namesOfOptions,expectedNamesOfOptions);
+        assertEquals(namesOfOptions, expectedNamesOfOptions);
     }
+
     @Test
-    public void selectingOptionsFromDropDownTest(){
+    public void selectingOptionsFromDropDownTest() {
         WebElement countryWebElement = driver.findElement(By.id("country"));
         Select countryDropDown = new Select(countryWebElement);
 
         countryDropDown.selectByIndex(1);
 
-     //   sleep();
+        //   sleep();
 
-        assertEquals(countryDropDown.getFirstSelectedOption().getText(),"Poland");
+        assertEquals(countryDropDown.getFirstSelectedOption().getText(), "Poland");
 
         countryDropDown.selectByValue("de_DE");
-     //   sleep();
-        assertEquals(countryDropDown.getFirstSelectedOption().getText(),"Germany");
+        //   sleep();
+        assertEquals(countryDropDown.getFirstSelectedOption().getText(), "Germany");
 
         countryDropDown.selectByVisibleText("UK");
 
-        assertEquals(countryDropDown.getFirstSelectedOption().getText(),"UK");
-
+        assertEquals(countryDropDown.getFirstSelectedOption().getText(), "UK");
     }
 
+    @Test
+    public void checkElementsOnPageTest() {
 
+        WebElement usernameField = driver.findElement(By.id("username"));
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement emailLabel = driver.findElement(By.cssSelector("span[class='help-block']"));
+
+        System.out.println("Is usernameField displayed:" + usernameField.isDisplayed());
+        System.out.println("Is usernameField enabled" + usernameField.isEnabled());
+
+        System.out.println("Is passwordField displayed:" + passwordField.isDisplayed());
+        System.out.println("Is passwordField enabled:" + passwordField.isEnabled());
+
+        System.out.println("Is emailLabel displayed" + emailLabel.isDisplayed());
+        System.out.println("Is emailLabel enabled" + emailLabel.isEnabled());
+
+        assertTrue(usernameField.isDisplayed());
+        assertTrue(passwordField.isDisplayed());
+        assertTrue(emailLabel.isDisplayed());
+
+        assertTrue(usernameField.isEnabled());
+        assertTrue(passwordField.isEnabled());
+
+
+    }
 
 
     private void sleep() {

@@ -113,8 +113,30 @@ public class WebElementsTest {
         expectedNamesOfOptions.add("UK");
 
         assertEquals(namesOfOptions,expectedNamesOfOptions);
+    }
+    @Test
+    public void selectingOptionsFromDropDownTest(){
+        WebElement countryWebElement = driver.findElement(By.id("country"));
+        Select countryDropDown = new Select(countryWebElement);
+
+        countryDropDown.selectByIndex(1);
+
+     //   sleep();
+
+        assertEquals(countryDropDown.getFirstSelectedOption().getText(),"Poland");
+
+        countryDropDown.selectByValue("de_DE");
+     //   sleep();
+        assertEquals(countryDropDown.getFirstSelectedOption().getText(),"Germany");
+
+        countryDropDown.selectByVisibleText("UK");
+
+        assertEquals(countryDropDown.getFirstSelectedOption().getText(),"UK");
 
     }
+
+
+
 
     private void sleep() {
         try {
@@ -131,5 +153,4 @@ public class WebElementsTest {
         driver.close();
         driver.quit();
     }
-
 }

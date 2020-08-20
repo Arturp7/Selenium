@@ -7,6 +7,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.testng.Assert.*;
 
 public class WebElementsTest {
@@ -96,6 +99,20 @@ public class WebElementsTest {
 
         Select countryDropdown = new Select(countryWebElement);
 
+        List<WebElement> options = countryDropdown.getOptions();
+
+        List<String> namesOfOptions = new ArrayList<String>();
+
+        for (WebElement option : options){
+            namesOfOptions.add(option.getText());
+            System.out.println(option.getText());
+        }
+        List<String> expectedNamesOfOptions = new ArrayList<String>();
+        expectedNamesOfOptions.add("Germany");
+        expectedNamesOfOptions.add("Poland");
+        expectedNamesOfOptions.add("UK");
+
+        assertEquals(namesOfOptions,expectedNamesOfOptions);
 
     }
 

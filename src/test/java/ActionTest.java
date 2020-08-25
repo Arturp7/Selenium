@@ -21,7 +21,7 @@ public class ActionTest {
     @BeforeMethod
     public void beforeTest() {
         System.setProperty("webdriver.chrome.driver", "C:drivers/chromedriver.exe");
-        driver = new ChromeDriver();
+        driver =  new ChromeDriver();
         driver.navigate().to("http://przyklady.javastart.pl/test/hover_mouse.html");
     }
 

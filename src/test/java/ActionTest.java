@@ -36,8 +36,6 @@ public class ActionTest {
 
         action.moveToElement(smileyIcon).moveToElement(smileyIcon2).build().perform();
 
-
-
     }
 
     private void sleep() {
